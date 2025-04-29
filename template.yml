@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  AWS SAM Template for SQS Queue
+
+Resources:
+  DemoQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: go-sqs-demo-queue
+      VisibilityTimeout: 30
+      MessageRetentionPeriod: 345600  # 4 days
+      # Add any other queue configurations you need
+
+Outputs:
+  QueueURL:
+    Description: "URL of the SQS Queue"
+    Value: !Ref DemoQueue
+  QueueARN:
+    Description: "ARN of the SQS Queue"
+    Value: !GetAtt DemoQueue.Arn
+  QueueName:
+    Description: "Name of the SQS Queue"
+    Value: !GetAtt DemoQueue.QueueName
